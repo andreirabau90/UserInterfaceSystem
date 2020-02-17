@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>EditPage</title>
+</head>
+<body>
+<th:block>
+    <form th:object="${editUser}" th:action="@{'/user/id/edit'}" th:method="post">
+        <table>
+            <tr>
+                Username :<b th:text="*{userName}"></b>
+                <td><input type="hidden" th:field="*{userName}"></td>
+            <tr>
+                <td>Password</td>
+                <td><input type="password" th:field="*{password}"></td>
+                <td>
+                    <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>First name</td>
+                <td><input type="text" th:field="${editUser.firstName}"></td>
+                <td>
+                    <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>Last name</td>
+                <td><input type="text" th:field="${editUser.lastName}"></td>
+                <td>
+                    <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>Role</td>
+                <td>
+                    <select th:field="*{role}">
+                        <option value="USER">User</option>
+                        <option value="ADMIN">Admin</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Status</td>
+                <td>
+                    <select th:field="*{status}">
+                        <option value="ACTIVE">Active</option>
+                        <option value="INACTIVE">Inactive</option>
+                    </select>
+                </td>
+            </tr>
+        </table>
+        <input type="hidden" name="editUserId" th:field="${editUser.id}">
+        <input type="hidden" name="idUser" th:value="${userAccount.id}">
+        <input type="submit" value="Edit">
+    </form>
+</th:block>
+<th:block>
+    <form th:object="${userAccount}" th:action="@{/user}">
+        <input type="hidden" name="userAccount" th:value="${userAccount.id}">
+        <input type="submit" value="Return">
+    </form>
+</th:block>
+</body>
+</html>

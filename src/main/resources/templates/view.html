@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>View</title>
+</head>
+<body>
+<th:block th:object="${editUser}">
+    username    : <b th:text="*{userName}"></b><br>
+    first name  : <b th:text="*{firstName}"></b><br>
+    last name   : <b th:text="*{lastName}"></b><br>
+    role        : <b th:text="*{role}"></b><br>
+    status      : <b th:text="*{status}"></b><br>
+    create date : <b th:text="*{createDate}"></b><br>
+    <th:block th:if="${userAccount.role==T(com.example.TestWork.enums.Role).ADMIN}">
+        <form th:object="${editUser}" th:action="@{/edit}">
+            <input type="hidden" name="editUser" th:value="${editUser.id}">
+            <input type="hidden" name="userAccount" th:value="${userAccount.id}">
+            <input type="submit" value="Edit">
+        </form>
+    </th:block>
+</th:block>
+    <form th:action="@{/user}">
+        <input type="hidden" name="userAccount" th:value="${userAccount.id}">
+        <input type="submit" value="Return">
+    </form>
+</body>
+</html>

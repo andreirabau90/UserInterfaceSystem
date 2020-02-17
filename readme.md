@@ -1,0 +1,1 @@
+I used : Java 8, Spring (Boot,MVC,Data,Security), Maven, Thymeleaf, PostgreSQL, Lombok

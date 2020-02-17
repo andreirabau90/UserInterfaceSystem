@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>List</title>
+</head>
+<body>
+<th:block th:object="${userAccount}">
+    username:<b th:text="*{userName}"></b>
+    <form th:object="${userAccount}" th:action="@{/return}">
+        <input type="hidden" name="userAccount"  th:value="${userAccount.id}">
+        <input type="submit" value="Return">
+    </form>
+</th:block>
+<th:block th:each="user : ${list}" >
+    <br>
+    username :<b th:text="${user.userName}"></b>
+    <form th:object="${user}" th:action="@{user/id}">
+        <input type="hidden" name="userAccount"  th:value="${userAccount.id}">
+        <input type="hidden" name="idUser" th:value="${user.id}">
+        <input type="submit" value="view profile"/>
+    </form>
+    <br>
+</th:block>
+</body>
+</html>

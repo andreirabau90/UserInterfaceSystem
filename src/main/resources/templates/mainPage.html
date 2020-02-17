@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>MainPage</title>
+</head>
+<body>
+<th:block th:object="${userAccount}">
+    Hello <b th:text="*{userName}"></b>
+    <form th:object="${userAccount}" th:action="@{/user}">
+        <input type="hidden" th:field="*{userName}">
+        <input type="hidden" th:field="*{id}">
+        <input type="hidden" th:field="*{role}">
+        <input type="submit" value="listUsers">
+    </form>
+</th:block>
+<th:block th:if="${userAccount.role==T(com.example.TestWork.enums.Role).ADMIN}">
+    <form th:action="@{/registration}">
+        <input type="hidden" name="userAccount" th:value="${userAccount.id}">
+        <input type="submit" value="Create user">
+    </form>
+</th:block>
+<form th:action="@{/}">
+    <input type="submit" value="Exit">
+</form>
+</body>
+</html>

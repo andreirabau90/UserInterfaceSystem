@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration</title>
+</head>
+<body>
+<form method="post" th:action="@{/createUser}" th:object="${userForm}">
+    <table>
+        <tr>
+            <td>User name</td>
+            <td><input type="text" th:field="*{userName}"></td>
+            <td>
+                <span th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}">..</span>
+            </td>
+        </tr>
+        <tr>
+            <td>Password</td>
+            <td><input type="text" th:field="*{password}"></td>
+            <td>
+                <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+            </td>
+        </tr>
+        <tr>
+            <td>confirmed password</td>
+            <td><input type="text" th:field="*{confirmedPassword}"></td>
+            <td>
+                <span th:if="${#fields.hasErrors('confirmedPassword')}" th:errors="*{confirmedPassword}"></span>
+            </td>
+        </tr>
+        <tr>
+            <td>First name</td>
+            <td><input type="text" th:field="*{firstName}"></td>
+            <td>
+                <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></span>
+            </td>
+        </tr>
+        <tr>
+            <td>Last name</td>
+            <td><input type="text" th:field="*{lastName}"></td>
+            <td>
+                <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></span>
+            </td>
+        </tr>
+        <tr>
+            <td>Role</td>
+            <td>
+                <select th:field="*{role}">
+                    <option value="USER">User</option>
+                    <option value="ADMIN">Admin</option>
+                </select>
+            </td>
+            <td>
+                <span th:if="${#fields.hasErrors('role')}" th:errors="*{role}"></span>
+            </td>
+        </tr>
+    </table>
+    <input type="hidden" name="userAccount" th:value="${userAccount.id}">
+    <input type="submit" value="registration">
+</form>
+<th:block>
+    <div th:switch="${userAccount.id==0}">
+        <form th:case="true" th:action="@{/}">
+            <input type="submit" value="Exit">
+        </form>
+        <form th:case="false" th:object="${userAccount}" th:action="@{/return}">
+            <input type="hidden" name="userAccount" th:value="${userAccount.id}">
+            <input type="submit" value="Return">
+        </form>
+    </div>
+</th:block>
+
+</body>
+</html>
